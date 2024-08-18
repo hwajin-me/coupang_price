@@ -19,7 +19,7 @@ SCAN_INTERVAL = DEFAULT_SCAN_INTERVAL
 DEFAULT_PREFIX = 'Coupang'
 
 URL_BASE = 'https://m.coupang.com/vm/v5/'
-REQUEST_HEADER = {'User-Agent':'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B137 Safari/601.1'}
+REQUEST_HEADER = {'User-Agent':'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B137 Safari/601.1', 'Accept-Language':'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7'}
 
 _ITEM_SCHEMA = vol.All(
     vol.Schema({
