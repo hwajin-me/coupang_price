@@ -132,14 +132,14 @@ class CoupangPriceSensor(Entity):
                 u = re.match(r"^(?P<per>[\d,]{1,})(?P<unit_type>g|개|ml|kg|l)당 (?P<price>[\d,]{1,})원$", info['unitPrice'])
                 g = u.groupdict()
                 self._info['unit_type'] = g['unit_type']
-                self._info['unit_per'] = float(g['per'])
-                self._info['unit_each_price'] = float(g['price'])
-                if g['unit_type'] == 'g' and int(g['per']) == 10:
-                    self._info['unit_each_price'] = float(g['price']) * 10
-                    self._info['unit_per'] = float(g['per']) * 10
-                if g['unit_type'] == 'ml' and int(g['per']) == 10:
-                    self._info['unit_each_price'] = float(g['price']) * 10
-                    self._info['unit_per'] = float(g['per']) * 10
+                self._info['unit_per'] = float(g['per'].replace(',', ''))
+                self._info['unit_each_price'] = float(g['price'].replace(',', ''))
+                if g['unit_type'] == 'g' and int(g['per'].replace(',', '')) == 10:
+                    self._info['unit_each_price'] = float(g['price'].replace(',', '')) * 10
+                    self._info['unit_per'] = float(g['per'].replace(',', '')) * 10
+                if g['unit_type'] == 'ml' and int(g['per'].replace(',', '')) == 10:
+                    self._info['unit_each_price'] = float(g['price'].replace(',', '')) * 10
+                    self._info['unit_per'] = float(g['per'].replace(',', '')) * 10
             
         except Exception as e:
             _LOGGER.error(e)
