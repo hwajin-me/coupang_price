@@ -129,7 +129,7 @@ class CoupangPriceSensor(Entity):
                 self._info['unit_price'] = info['couponUnitPrice']
             elif 'unitPrice' in info:
                 self._info['unit_price'] = info['unitPrice']
-                u = re.findall(r"^(?P<per>[\d,]{1,})(?P<unit_type>g|개|ml|kg|l)당 (?P<price>[\d,]{1,})원$", info['unitPrice'])
+                u = re.match(r"^(?P<per>[\d,]{1,})(?P<unit_type>g|개|ml|kg|l)당 (?P<price>[\d,]{1,})원$", info['unitPrice'])
                 g = u.groupdict()
                 self._info['unit_type'] = g['unit_type']
                 self._info['unit_per'] = float(g['per'])
