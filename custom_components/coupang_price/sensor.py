@@ -129,6 +129,17 @@ class CoupangPriceSensor(Entity):
                 self._info['unit_price'] = info['couponUnitPrice']
             elif 'unitPrice' in info:
                 self._info['unit_price'] = info['unitPrice']
+                u = re.findall(r"^(?<per>[\d,]{1,})(?<unit_type>g|개|ml|kg|l)당 (?<price>[\d,]{1,})원$", info['unitPrice'])
+                g = u.groupdict()
+                self._info['unit_type'] = g['unit_type']
+                self._info['unit_per'] = float(g['per'])
+                self._info['unit_each_price'] = float(g['price'])
+                if g['unit_type'] == 'g' and int(g['per']) == 10:
+                    self._info['unit_each_price'] = float(g['price']) * 10
+                    self._info['unit_per'] = float(g['per']) * 10
+                if g['unit_type'] == 'ml' and int(g['per']) == 10:
+                    self._info['unit_each_price'] = float(g['price']) * 10
+                    self._info['unit_per'] = float(g['per']) * 10
             
         except Exception as e:
             _LOGGER.error(e)
